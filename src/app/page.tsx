@@ -35,7 +35,7 @@ export default function Home() {
           <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-6xl">
             One link.
             <br />
-            <span className="text-blue-600">All your payment methods.</span>
+            <span className="text-yellow-500">All your payment methods.</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
             Stop asking &quot;do you have Venmo?&quot; Share a single link that shows all your payment options.
@@ -44,7 +44,7 @@ export default function Home() {
           <div className="mt-10 flex items-center justify-center gap-4">
             <Link
               href="/signup"
-              className="rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
+              className="rounded-full bg-amber-500 px-6 py-3 text-sm font-semibold text-zinc-900 shadow-sm hover:bg-amber-400"
             >
               Create your pay link
             </Link>
@@ -61,7 +61,7 @@ export default function Home() {
         <div className="mx-auto mt-20 max-w-sm">
           <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-xl dark:border-zinc-800 dark:bg-zinc-900">
             <div className="text-center">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-2xl font-bold text-white">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-yellow-400 to-amber-500 text-2xl font-bold text-zinc-900">
                 J
               </div>
               <h3 className="mt-4 text-lg font-semibold text-zinc-900 dark:text-white">
@@ -94,7 +94,7 @@ export default function Home() {
           </h2>
           <div className="mt-12 grid gap-8 sm:grid-cols-3">
             <div className="text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-xl font-bold text-blue-600 dark:bg-blue-900/30">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-amber-100 text-xl font-bold text-amber-600 dark:bg-amber-900/30">
                 1
               </div>
               <h3 className="mt-4 font-semibold text-zinc-900 dark:text-white">
@@ -105,7 +105,7 @@ export default function Home() {
               </p>
             </div>
             <div className="text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-xl font-bold text-blue-600 dark:bg-blue-900/30">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-amber-100 text-xl font-bold text-amber-600 dark:bg-amber-900/30">
                 2
               </div>
               <h3 className="mt-4 font-semibold text-zinc-900 dark:text-white">
@@ -116,7 +116,7 @@ export default function Home() {
               </p>
             </div>
             <div className="text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-xl font-bold text-blue-600 dark:bg-blue-900/30">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-amber-100 text-xl font-bold text-amber-600 dark:bg-amber-900/30">
                 3
               </div>
               <h3 className="mt-4 font-semibold text-zinc-900 dark:text-white">
@@ -168,7 +168,7 @@ export default function Home() {
           </p>
           <Link
             href="/signup"
-            className="mt-8 inline-block rounded-full bg-blue-600 px-8 py-4 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
+            className="mt-8 inline-block rounded-full bg-amber-500 px-8 py-4 text-sm font-semibold text-zinc-900 shadow-sm hover:bg-amber-400"
           >
             Get started for free
           </Link>
