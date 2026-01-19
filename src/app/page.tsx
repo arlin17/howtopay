@@ -10,7 +10,7 @@ export default function Home() {
       <header className="border-b border-zinc-200 dark:border-zinc-800">
         <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4">
           <Link href="/" className="text-xl font-bold">
-            HowToPay<span className="text-blue-600">.me</span>
+            Cheddar<span className="text-yellow-500">l.ink</span>
           </Link>
           <div className="flex items-center gap-4">
             <Link
@@ -67,7 +67,7 @@ export default function Home() {
               <h3 className="mt-4 text-lg font-semibold text-zinc-900 dark:text-white">
                 John Doe
               </h3>
-              <p className="text-sm text-zinc-500">howtopay.me/john</p>
+              <p className="text-sm text-zinc-500">cheddarl.ink/john</p>
             </div>
             <div className="mt-6 space-y-3">
               {methods.map((method) => (
@@ -112,7 +112,7 @@ export default function Home() {
                 Share your link
               </h3>
               <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-                Get a custom URL like howtopay.me/yourname to share anywhere.
+                Get a custom URL like cheddarl.ink/yourname to share anywhere.
               </p>
             </div>
             <div className="text-center">
@@ -179,7 +179,7 @@ export default function Home() {
       <footer className="mt-32 border-t border-zinc-200 dark:border-zinc-800">
         <div className="mx-auto max-w-5xl px-4 py-8">
           <p className="text-center text-sm text-zinc-500">
-            &copy; {new Date().getFullYear()} HowToPay.me. All rights reserved.
+            &copy; {new Date().getFullYear()} Cheddarl.ink. All rights reserved.
           </p>
         </div>
       </footer>

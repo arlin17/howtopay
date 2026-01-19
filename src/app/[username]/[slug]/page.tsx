@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props) {
 
   if (!data) {
     return {
-      title: 'Link not found | HowToPay.me',
+      title: 'Link not found | Cheddarl.ink',
     }
   }
 
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props) {
   const displayName = user.display_name || user.username
 
   return {
-    title: `Pay ${displayName} | HowToPay.me`,
+    title: `Pay ${displayName} | Cheddarl.ink`,
     description: `Pay ${displayName} - temporary payment link`,
     robots: 'noindex, nofollow', // Don't index ephemeral links
   }

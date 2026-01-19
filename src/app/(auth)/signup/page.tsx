@@ -83,7 +83,7 @@ export default function SignupPage() {
       <div className="w-full max-w-sm">
         <div className="text-center">
           <Link href="/" className="text-2xl font-bold">
-            HowToPay<span className="text-blue-600">.me</span>
+            Cheddar<span className="text-yellow-500">l.ink</span>
           </Link>
           <h1 className="mt-6 text-2xl font-semibold text-zinc-900 dark:text-white">
             Create your pay link
@@ -146,7 +146,7 @@ export default function SignupPage() {
               </label>
               <div className="mt-1 flex rounded-lg border border-zinc-300 bg-white focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 dark:border-zinc-700 dark:bg-zinc-900">
                 <span className="flex items-center pl-4 text-sm text-zinc-500">
-                  howtopay.me/
+                  cheddarl.ink/
                 </span>
                 <input
                   id="username"

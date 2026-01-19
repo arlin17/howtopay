@@ -48,7 +48,7 @@ export default function LoginPage() {
       <div className="w-full max-w-sm">
         <div className="text-center">
           <Link href="/" className="text-2xl font-bold">
-            HowToPay<span className="text-blue-600">.me</span>
+            Cheddar<span className="text-yellow-500">l.ink</span>
           </Link>
           <h1 className="mt-6 text-2xl font-semibold text-zinc-900 dark:text-white">
             Welcome back

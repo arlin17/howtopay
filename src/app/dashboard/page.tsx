@@ -37,7 +37,7 @@ export default async function DashboardPage() {
 
   const paymentMethods = (paymentMethodsData || []) as PaymentMethod[]
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://howtopay.me'
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://cheddarl.ink'
   const payLink = `${baseUrl}/${profile.username}`
 
   return (

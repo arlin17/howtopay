@@ -39,7 +39,7 @@ export default async function EphemeralPage() {
     .order('created_at', { ascending: false })
     .limit(10)
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://howtopay.me'
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://cheddarl.ink'
 
   return (
     <div className="space-y-8">

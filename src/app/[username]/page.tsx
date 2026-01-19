@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props) {
 
   if (!data) {
     return {
-      title: 'User not found | HowToPay.me',
+      title: 'User not found | Cheddarl.ink',
     }
   }
 
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props) {
   const displayName = user.display_name || user.username
 
   return {
-    title: `Pay ${displayName} | HowToPay.me`,
+    title: `Pay ${displayName} | Cheddarl.ink`,
     description: `Pay ${displayName} with Venmo, CashApp, PayPal, and more`,
   }
 }

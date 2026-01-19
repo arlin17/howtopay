@@ -34,7 +34,7 @@ export function QRCodeDisplay({ url, size = 200 }: Props) {
     })
 
     const link = document.createElement('a')
-    link.download = 'howtopay-qr.png'
+    link.download = 'cheddar-qr.png'
     link.href = largeDataUrl
     link.click()
   }

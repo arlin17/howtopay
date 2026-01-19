@@ -19,7 +19,7 @@ export default function PreviewPage() {
       <Container size="xl">
         <div className="mb-12 text-center">
           <h1 className="text-4xl font-bold text-foreground mb-2">
-            HowToPay Design System
+            Cheddar Design System
           </h1>
           <p className="text-foreground-muted">
             Bold & Modern • AI-Forward • WCAG 2.1 AA Compliant

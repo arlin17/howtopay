@@ -123,7 +123,7 @@ export default function SetupPage() {
           </label>
           <div className="mt-1 flex rounded-lg border border-zinc-300 bg-white focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 dark:border-zinc-700 dark:bg-zinc-900">
             <span className="flex items-center pl-4 text-sm text-zinc-500">
-              howtopay.me/
+              cheddarl.ink/
             </span>
             <input
               id="username"

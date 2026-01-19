@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "HowToPay.me - One link, all your payment methods",
+  title: "Cheddar - One link, all your payment methods",
   description: "Share a single link with all your payment options. Venmo, CashApp, PayPal, Zelle, and more. Stop asking 'do you have Venmo?'",
 };
 

@@ -29,7 +29,7 @@ export default async function DashboardLayout({
       <header className="border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
         <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4">
           <Link href="/dashboard" className="text-xl font-bold">
-            HowToPay<span className="text-blue-600">.me</span>
+            Cheddar<span className="text-yellow-500">l.ink</span>
           </Link>
           <div className="flex items-center gap-4">
             {profile?.username && (
