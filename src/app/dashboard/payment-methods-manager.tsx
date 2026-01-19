@@ -12,6 +12,149 @@ interface Props {
   userId: string
 }
 
+function ReferralBadge({ method }: { method: PaymentMethod }) {
+  const config = PAYMENT_METHODS[method.type as PaymentMethodType]
+  if (!config?.referral) return null
+
+  if (method.referral_code && method.referral_enabled) {
+    return (
+      <span className="rounded bg-green-100 px-1.5 py-0.5 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
+        Referral active
+      </span>
+    )
+  }
+
+  if (method.referral_code && !method.referral_enabled) {
+    return (
+      <span className="rounded bg-zinc-100 px-1.5 py-0.5 text-xs text-zinc-500 dark:bg-zinc-700 dark:text-zinc-400">
+        Referral paused
+      </span>
+    )
+  }
+
+  return (
+    <span className="rounded bg-blue-100 px-1.5 py-0.5 text-xs text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+      Referral available
+    </span>
+  )
+}
+
+function ReferralSection({
+  method,
+  onUpdate,
+}: {
+  method: PaymentMethod
+  onUpdate: (id: string, updates: { referral_code?: string | null; referral_enabled?: boolean }) => Promise<void>
+}) {
+  const config = PAYMENT_METHODS[method.type as PaymentMethodType]
+  const [referralCode, setReferralCode] = useState(method.referral_code || '')
+  const [isEnabled, setIsEnabled] = useState(method.referral_enabled)
+  const [isSaving, setIsSaving] = useState(false)
+  const hasExistingCode = !!method.referral_code
+  const [isExpanded, setIsExpanded] = useState(!hasExistingCode)
+
+  if (!config?.referral) return null
+
+  const handleSave = async () => {
+    setIsSaving(true)
+    await onUpdate(method.id, {
+      referral_code: referralCode || null,
+      referral_enabled: isEnabled && !!referralCode,
+    })
+    setIsSaving(false)
+  }
+
+  const handleToggle = async () => {
+    if (!referralCode) return
+    const newEnabled = !isEnabled
+    setIsEnabled(newEnabled)
+    setIsSaving(true)
+    await onUpdate(method.id, { referral_enabled: newEnabled })
+    setIsSaving(false)
+  }
+
+  const hasChanges = referralCode !== (method.referral_code || '')
+
+  return (
+    <div className="mt-3 border-t border-zinc-200 pt-3 dark:border-zinc-700">
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="flex w-full items-center justify-between text-sm"
+      >
+        <span className="flex flex-col items-start gap-0.5">
+          <span className="flex items-center gap-2 font-medium text-zinc-700 dark:text-zinc-300">
+            Referral Program
+            <span className="rounded bg-green-100 px-1.5 py-0.5 text-xs text-green-700 dark:bg-green-900/30 dark:text-green-400">
+              {config.referral.bonusText}
+            </span>
+          </span>
+          {!hasExistingCode && (
+            <span className="text-xs text-zinc-500 dark:text-zinc-400">
+              Refer your friends! Add your promo code from the {config.name} app.
+            </span>
+          )}
+        </span>
+        <svg
+          className={`h-4 w-4 text-zinc-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {isExpanded && (
+        <div className="mt-3 space-y-3">
+          <div>
+            <label className="mb-1 block text-xs text-zinc-500 dark:text-zinc-400">
+              {config.referral.inputLabel}
+            </label>
+            <input
+              type="text"
+              value={referralCode}
+              onChange={(e) => setReferralCode(e.target.value)}
+              placeholder={config.referral.inputPlaceholder}
+              className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
+            />
+          </div>
+
+          {referralCode && (
+            <div className="flex items-center justify-between">
+              <label className="text-sm text-zinc-600 dark:text-zinc-400">
+                Show referral on public page
+              </label>
+              <button
+                onClick={handleToggle}
+                disabled={isSaving}
+                className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                  isEnabled ? 'bg-blue-600' : 'bg-zinc-200 dark:bg-zinc-700'
+                }`}
+              >
+                <span
+                  className={`inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                    isEnabled ? 'translate-x-5' : 'translate-x-0'
+                  }`}
+                />
+              </button>
+            </div>
+          )}
+
+          {hasChanges && (
+            <button
+              onClick={handleSave}
+              disabled={isSaving}
+              className="w-full rounded-lg bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-500 disabled:opacity-50"
+            >
+              {isSaving ? 'Saving...' : 'Save referral'}
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
 export function PaymentMethodsManager({ initialMethods, userId }: Props) {
   const router = useRouter()
   const [methods, setMethods] = useState<PaymentMethod[]>(initialMethods)
@@ -68,6 +211,18 @@ export function PaymentMethodsManager({ initialMethods, userId }: Props) {
     router.refresh()
   }
 
+  const handleReferralUpdate = async (
+    id: string,
+    updates: { referral_code?: string | null; referral_enabled?: boolean }
+  ) => {
+    const supabase = createClient()
+    await (supabase.from('payment_methods') as any).update(updates).eq('id', id)
+    setMethods(
+      methods.map((m) => (m.id === id ? { ...m, ...updates } : m))
+    )
+    router.refresh()
+  }
+
   return (
     <div className="mt-6 space-y-4">
       {/* Existing methods */}
@@ -82,32 +237,36 @@ export function PaymentMethodsManager({ initialMethods, userId }: Props) {
             return (
               <div
                 key={method.id}
-                className="flex items-center justify-between rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3 dark:border-zinc-700 dark:bg-zinc-800"
+                className="rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3 dark:border-zinc-700 dark:bg-zinc-800"
               >
-                <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-lg dark:bg-zinc-900">
-                    {config?.icon || '?'}
-                  </span>
-                  <div>
-                    <p className="font-medium text-zinc-900 dark:text-white">
-                      {config?.name || method.type}
-                    </p>
-                    <p className="text-sm text-zinc-500">
-                      {formatHandle(method.type as PaymentMethodType, method.handle)}
-                      {method.is_pii && (
-                        <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-xs text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
-                          PII
-                        </span>
-                      )}
-                    </p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-lg dark:bg-zinc-900">
+                      {config?.icon || '?'}
+                    </span>
+                    <div>
+                      <p className="flex items-center gap-2 font-medium text-zinc-900 dark:text-white">
+                        {config?.name || method.type}
+                        <ReferralBadge method={method} />
+                      </p>
+                      <p className="text-sm text-zinc-500">
+                        {formatHandle(method.type as PaymentMethodType, method.handle)}
+                        {method.is_pii && (
+                          <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-xs text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+                            PII
+                          </span>
+                        )}
+                      </p>
+                    </div>
                   </div>
+                  <button
+                    onClick={() => handleDelete(method.id)}
+                    className="text-sm text-red-600 hover:text-red-500"
+                  >
+                    Remove
+                  </button>
                 </div>
-                <button
-                  onClick={() => handleDelete(method.id)}
-                  className="text-sm text-red-600 hover:text-red-500"
-                >
-                  Remove
-                </button>
+                <ReferralSection method={method} onUpdate={handleReferralUpdate} />
               </div>
             )
           })}

@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { PAYMENT_METHODS, formatHandle } from '@/lib/payment-methods'
+import { ReferralCTA } from '@/components/referral-cta'
 import type { PaymentMethodType, User, PaymentMethod } from '@/types/database'
 
 interface Props {
@@ -128,25 +129,27 @@ export default async function PayPage({ params }: Props) {
 
                 if (url) {
                   return (
-                    <a
-                      key={method.id}
-                      href={url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700"
-                    >
-                      {ButtonContent}
-                    </a>
+                    <div key={method.id}>
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700"
+                      >
+                        {ButtonContent}
+                      </a>
+                      <ReferralCTA method={method} />
+                    </div>
                   )
                 }
 
                 // For methods without URLs (like Zelle on persistent page - but Zelle is PII so won't show here)
                 return (
-                  <div
-                    key={method.id}
-                    className="flex items-center gap-3 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 dark:border-zinc-700 dark:bg-zinc-800"
-                  >
-                    {ButtonContent}
+                  <div key={method.id}>
+                    <div className="flex items-center gap-3 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 dark:border-zinc-700 dark:bg-zinc-800">
+                      {ButtonContent}
+                    </div>
+                    <ReferralCTA method={method} />
                   </div>
                 )
               })}

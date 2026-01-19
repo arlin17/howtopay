@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { PAYMENT_METHODS, formatHandle } from '@/lib/payment-methods'
 import { CopyHandle } from './copy-handle'
+import { ReferralCTA } from '@/components/referral-cta'
 import type { PaymentMethodType, User, EphemeralLink, PaymentMethod } from '@/types/database'
 
 interface Props {
@@ -169,64 +170,66 @@ export default async function EphemeralPayPage({ params }: Props) {
               // For Zelle (no deep link), show the handle to copy
               if (!url) {
                 return (
-                  <div
-                    key={method.id}
-                    className="rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 dark:border-zinc-700 dark:bg-zinc-800"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-lg dark:bg-zinc-900">
-                        {config?.icon || '?'}
-                      </span>
-                      <div className="flex-1">
-                        <p className="font-medium text-zinc-900 dark:text-white">
-                          {config?.name || method.type}
-                        </p>
-                        <p className="text-sm text-zinc-500">Send to:</p>
+                  <div key={method.id}>
+                    <div className="rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 dark:border-zinc-700 dark:bg-zinc-800">
+                      <div className="flex items-center gap-3">
+                        <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-lg dark:bg-zinc-900">
+                          {config?.icon || '?'}
+                        </span>
+                        <div className="flex-1">
+                          <p className="font-medium text-zinc-900 dark:text-white">
+                            {config?.name || method.type}
+                          </p>
+                          <p className="text-sm text-zinc-500">Send to:</p>
+                        </div>
+                      </div>
+                      <div className="mt-3 flex items-center gap-2 rounded-lg bg-white px-3 py-2 dark:bg-zinc-900">
+                        <code className="flex-1 text-sm text-zinc-900 dark:text-white">
+                          {method.handle}
+                        </code>
+                        <CopyHandle handle={method.handle} />
                       </div>
                     </div>
-                    <div className="mt-3 flex items-center gap-2 rounded-lg bg-white px-3 py-2 dark:bg-zinc-900">
-                      <code className="flex-1 text-sm text-zinc-900 dark:text-white">
-                        {method.handle}
-                      </code>
-                      <CopyHandle handle={method.handle} />
-                    </div>
+                    <ReferralCTA method={method} />
                   </div>
                 )
               }
 
               return (
-                <a
-                  key={method.id}
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700"
-                >
-                  <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-lg dark:bg-zinc-800">
-                    {config?.icon || '?'}
-                  </span>
-                  <div className="flex-1 text-left">
-                    <p className="font-medium text-zinc-900 dark:text-white">
-                      {config?.name || method.type}
-                    </p>
-                    <p className="text-sm text-zinc-500">
-                      {formatHandle(method.type as PaymentMethodType, method.handle)}
-                    </p>
-                  </div>
-                  <svg
-                    className="h-5 w-5 text-zinc-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                <div key={method.id}>
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </a>
+                    <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-lg dark:bg-zinc-800">
+                      {config?.icon || '?'}
+                    </span>
+                    <div className="flex-1 text-left">
+                      <p className="font-medium text-zinc-900 dark:text-white">
+                        {config?.name || method.type}
+                      </p>
+                      <p className="text-sm text-zinc-500">
+                        {formatHandle(method.type as PaymentMethodType, method.handle)}
+                      </p>
+                    </div>
+                    <svg
+                      className="h-5 w-5 text-zinc-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </a>
+                  <ReferralCTA method={method} />
+                </div>
               )
             })}
           </div>

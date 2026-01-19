@@ -1,5 +1,13 @@
 import { PaymentMethodType } from '@/types/database'
 
+export interface ReferralConfig {
+  type: 'link' | 'code'
+  bonusText: string           // "Get $5 when you sign up"
+  instructionText: string     // "Sign up with this link"
+  inputPlaceholder: string
+  inputLabel: string          // Help text for dashboard
+}
+
 export interface PaymentMethodConfig {
   type: PaymentMethodType
   name: string
@@ -9,6 +17,7 @@ export interface PaymentMethodConfig {
   buildUrl: (handle: string, amount?: number, memo?: string) => string | null
   isPii: boolean
   description: string
+  referral?: ReferralConfig
 }
 
 export const PAYMENT_METHODS: Record<PaymentMethodType, PaymentMethodConfig> = {
@@ -29,6 +38,13 @@ export const PAYMENT_METHODS: Record<PaymentMethodType, PaymentMethodConfig> = {
     },
     isPii: false,
     description: 'Venmo username (without @)',
+    referral: {
+      type: 'link',
+      bonusText: 'Get $5 when you sign up',
+      instructionText: 'Sign up with this link to get a bonus',
+      inputPlaceholder: 'https://venmo.com/invite/...',
+      inputLabel: 'Find your referral link in Venmo app → Menu → Invite Friends',
+    },
   },
   cashapp: {
     type: 'cashapp',
@@ -45,6 +61,13 @@ export const PAYMENT_METHODS: Record<PaymentMethodType, PaymentMethodConfig> = {
     },
     isPii: false,
     description: 'Cash App $cashtag (without $)',
+    referral: {
+      type: 'code',
+      bonusText: 'Get $5 when you sign up',
+      instructionText: 'Use this code when signing up',
+      inputPlaceholder: 'ABCD1234',
+      inputLabel: 'Find your referral code in Cash App → Profile → Invite Friends',
+    },
   },
   paypal: {
     type: 'paypal',
@@ -59,6 +82,13 @@ export const PAYMENT_METHODS: Record<PaymentMethodType, PaymentMethodConfig> = {
     },
     isPii: false,
     description: 'PayPal.me username',
+    referral: {
+      type: 'link',
+      bonusText: 'Get $10 when you sign up',
+      instructionText: 'Sign up with this link to get a bonus',
+      inputPlaceholder: 'https://py.pl/...',
+      inputLabel: 'Find your referral link in PayPal app → Settings → Invite Friends',
+    },
   },
   zelle: {
     type: 'zelle',

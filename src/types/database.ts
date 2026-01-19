@@ -46,6 +46,8 @@ export interface Database {
           handle: string
           display_order: number
           is_pii: boolean
+          referral_code: string | null
+          referral_enabled: boolean
           created_at: string
         }
         Insert: {
@@ -55,6 +57,8 @@ export interface Database {
           handle: string
           display_order?: number
           is_pii?: boolean
+          referral_code?: string | null
+          referral_enabled?: boolean
           created_at?: string
         }
         Update: {
@@ -64,6 +68,8 @@ export interface Database {
           handle?: string
           display_order?: number
           is_pii?: boolean
+          referral_code?: string | null
+          referral_enabled?: boolean
           created_at?: string
         }
       }
