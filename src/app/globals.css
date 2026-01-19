@@ -1,26 +1,260 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   HowToPay Design System
+   Bold & Modern • AI-Forward • WCAG 2.1 AA Compliant
+   ========================================================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* --------------------------------------------------------------------------
+     Color Tokens - Deep Dark Mode
+     Emerald/Teal • Bold & Vibrant • Glowing against dark
+     -------------------------------------------------------------------------- */
+
+  /* Background layers - Deep dark */
+  --background: #030712;
+  --background-subtle: #0a0f1a;
+  --background-muted: #111827;
+
+  /* Foreground / Text */
+  --foreground: #f0fdf4;
+  --foreground-muted: #a7f3d0;
+  --foreground-subtle: #6ee7b7;
+
+  /* Primary - Emerald (Bright & Glowing) */
+  --primary: #10b981;
+  --primary-hover: #34d399;
+  --primary-active: #059669;
+  --primary-foreground: #030712;
+  --primary-subtle: #064e3b;
+
+  /* Secondary */
+  --secondary: #f0fdf4;
+  --secondary-hover: #d1fae5;
+  --secondary-foreground: #030712;
+
+  /* Accent - Teal/Cyan for highlights */
+  --accent: #2dd4bf;
+  --accent-subtle: #0d9488;
+
+  /* Borders */
+  --border: #1f2937;
+  --border-strong: #374151;
+  --border-focus: #10b981;
+
+  /* Status colors */
+  --success: #4ade80;
+  --success-subtle: #14532d;
+  --warning: #fbbf24;
+  --warning-subtle: #78350f;
+  --error: #f87171;
+  --error-subtle: #7f1d1d;
+
+  /* Shadows - Emerald glow effects */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.6), 0 1px 2px -1px rgb(0 0 0 / 0.6);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.6), 0 2px 4px -2px rgb(0 0 0 / 0.6);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6), 0 4px 6px -4px rgb(0 0 0 / 0.6);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.6), 0 8px 10px -6px rgb(0 0 0 / 0.6);
+  --shadow-glow: 0 0 40px -10px rgb(16 185 129 / 0.7);
+
+  /* Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Focus ring - WCAG compliant */
+  --ring-width: 2px;
+  --ring-offset: 2px;
+  --ring-color: rgb(16 185 129 / 0.6);
 }
 
+/* --------------------------------------------------------------------------
+   Note: Dark mode is the default.
+   Add a .light class to html element to enable light mode if needed.
+   -------------------------------------------------------------------------- */
+html.light {
+  /* Background layers - Clean white */
+  --background: #ffffff;
+  --background-subtle: #f8fafc;
+  --background-muted: #f1f5f9;
+
+  /* Foreground / Text */
+  --foreground: #0f172a;
+  --foreground-muted: #475569;
+  --foreground-subtle: #94a3b8;
+
+  /* Primary - Emerald (darker for light mode) */
+  --primary: #059669;
+  --primary-hover: #047857;
+  --primary-active: #065f46;
+  --primary-foreground: #ffffff;
+  --primary-subtle: #d1fae5;
+
+  /* Secondary */
+  --secondary: #0f172a;
+  --secondary-hover: #1e293b;
+  --secondary-foreground: #ffffff;
+
+  /* Accent - Teal */
+  --accent: #14b8a6;
+  --accent-subtle: #ccfbf1;
+
+  /* Borders */
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --border-focus: #059669;
+
+  /* Status colors */
+  --success: #22c55e;
+  --success-subtle: #dcfce7;
+  --warning: #f59e0b;
+  --warning-subtle: #fef3c7;
+  --error: #ef4444;
+  --error-subtle: #fee2e2;
+
+  /* Shadows - standard */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-glow: 0 0 25px -5px rgb(5 150 105 / 0.4);
+
+  /* Focus ring */
+  --ring-color: rgb(5 150 105 / 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   Tailwind Theme Integration
+   -------------------------------------------------------------------------- */
 @theme inline {
+  /* Colors */
   --color-background: var(--background);
+  --color-background-subtle: var(--background-subtle);
+  --color-background-muted: var(--background-muted);
+
   --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-subtle: var(--foreground-subtle);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-subtle: var(--primary-subtle);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-subtle: var(--accent-subtle);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-border-focus: var(--border-focus);
+
+  --color-success: var(--success);
+  --color-success-subtle: var(--success-subtle);
+  --color-warning: var(--warning);
+  --color-warning-subtle: var(--warning-subtle);
+  --color-error: var(--error);
+  --color-error-subtle: var(--error-subtle);
+
+  /* Shadows */
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-glow: var(--shadow-glow);
+
+  /* Border Radius */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-full: var(--radius-full);
+
+  /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* --------------------------------------------------------------------------
+   Base Styles
+   -------------------------------------------------------------------------- */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------------------------------------------------
+   Focus Styles - WCAG 2.1 AA Compliant
+   Visible focus indicators for keyboard navigation
+   -------------------------------------------------------------------------- */
+:focus-visible {
+  outline: var(--ring-width) solid var(--ring-color);
+  outline-offset: var(--ring-offset);
+}
+
+/* Remove default focus for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* --------------------------------------------------------------------------
+   Reduced Motion
+   Respect user preferences for reduced motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Selection
+   -------------------------------------------------------------------------- */
+::selection {
+  background-color: var(--primary-subtle);
+  color: var(--foreground);
+}
+
+/* --------------------------------------------------------------------------
+   Scrollbar Styling (Webkit)
+   -------------------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-subtle);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground-subtle);
 }
