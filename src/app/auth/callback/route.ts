@@ -1,10 +1,12 @@
 import { createClient } from '@/lib/supabase/server'
-import { NextResponse } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 
-export async function GET(request: Request) {
-  const { searchParams, origin } = new URL(request.url)
-  const code = searchParams.get('code')
-  const setup = searchParams.get('setup')
+export async function GET(request: NextRequest) {
+  const code = request.nextUrl.searchParams.get('code')
+  const setup = request.nextUrl.searchParams.get('setup')
+
+  // Use nextUrl.origin which properly handles forwarded headers in production
+  const origin = request.nextUrl.origin
 
   if (code) {
     const supabase = await createClient()
