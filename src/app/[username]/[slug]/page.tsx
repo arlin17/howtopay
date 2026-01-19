@@ -99,6 +99,12 @@ export default async function EphemeralPayPage({ params }: Props) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   await (updateQuery as any).update({ view_count: link.view_count + 1 }).eq('id', link.id)
 
+  // Record page view for analytics (fire and forget)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (supabase.from('page_views') as any)
+    .insert({ user_id: user.id, page_type: 'ephemeral' })
+    .then(() => {})
+
   // Get payment methods for this link
   const { data: linkMethods } = await supabase
     .from('ephemeral_link_methods')

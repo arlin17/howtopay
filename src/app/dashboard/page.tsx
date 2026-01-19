@@ -37,6 +37,32 @@ export default async function DashboardPage() {
 
   const paymentMethods = (paymentMethodsData || []) as PaymentMethod[]
 
+  // Get analytics
+  const now = new Date()
+  const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString()
+  const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString()
+
+  const [totalViewsResult, last7DaysResult, last24HoursResult] = await Promise.all([
+    supabase
+      .from('page_views')
+      .select('id', { count: 'exact', head: true })
+      .eq('user_id', user.id),
+    supabase
+      .from('page_views')
+      .select('id', { count: 'exact', head: true })
+      .eq('user_id', user.id)
+      .gte('viewed_at', sevenDaysAgo),
+    supabase
+      .from('page_views')
+      .select('id', { count: 'exact', head: true })
+      .eq('user_id', user.id)
+      .gte('viewed_at', oneDayAgo),
+  ])
+
+  const totalViews = totalViewsResult.count || 0
+  const last7Days = last7DaysResult.count || 0
+  const last24Hours = last24HoursResult.count || 0
+
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://cheddarl.ink'
   const payLink = `${baseUrl}/${profile.username}`
 
@@ -50,6 +76,33 @@ export default async function DashboardPage() {
         <p className="mt-1 text-zinc-600 dark:text-zinc-400">
           Manage your payment methods and share your pay link
         </p>
+      </div>
+
+      {/* Analytics Card */}
+      <div className="rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+        <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">
+          Page Views
+        </h2>
+        <div className="mt-4 grid grid-cols-3 gap-4">
+          <div className="rounded-lg bg-zinc-50 p-4 dark:bg-zinc-800">
+            <p className="text-sm text-zinc-500 dark:text-zinc-400">Last 24 hours</p>
+            <p className="mt-1 text-3xl font-bold text-zinc-900 dark:text-white">
+              {last24Hours}
+            </p>
+          </div>
+          <div className="rounded-lg bg-zinc-50 p-4 dark:bg-zinc-800">
+            <p className="text-sm text-zinc-500 dark:text-zinc-400">Last 7 days</p>
+            <p className="mt-1 text-3xl font-bold text-zinc-900 dark:text-white">
+              {last7Days}
+            </p>
+          </div>
+          <div className="rounded-lg bg-zinc-50 p-4 dark:bg-zinc-800">
+            <p className="text-sm text-zinc-500 dark:text-zinc-400">All time</p>
+            <p className="mt-1 text-3xl font-bold text-zinc-900 dark:text-white">
+              {totalViews}
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Pay Link Card */}

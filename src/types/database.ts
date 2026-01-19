@@ -116,6 +116,26 @@ export interface Database {
           payment_method_id?: string
         }
       }
+      page_views: {
+        Row: {
+          id: string
+          user_id: string
+          page_type: 'persistent' | 'ephemeral'
+          viewed_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          page_type?: 'persistent' | 'ephemeral'
+          viewed_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          page_type?: 'persistent' | 'ephemeral'
+          viewed_at?: string
+        }
+      }
     }
   }
 }
@@ -124,3 +144,4 @@ export interface Database {
 export type User = Database['public']['Tables']['users']['Row']
 export type PaymentMethod = Database['public']['Tables']['payment_methods']['Row']
 export type EphemeralLink = Database['public']['Tables']['ephemeral_links']['Row']
+export type PageView = Database['public']['Tables']['page_views']['Row']

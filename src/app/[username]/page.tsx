@@ -50,6 +50,12 @@ export default async function PayPage({ params }: Props) {
 
   const user = userData as User
 
+  // Record page view (fire and forget, don't await)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (supabase.from('page_views') as any)
+    .insert({ user_id: user.id, page_type: 'persistent' })
+    .then(() => {})
+
   // Get non-PII payment methods only (persistent page)
   const { data: paymentMethodsData } = await supabase
     .from('payment_methods')
