@@ -8,7 +8,7 @@
 :root {
   /* --------------------------------------------------------------------------
      Color Tokens - Deep Dark Mode
-     Emerald/Teal • Bold & Vibrant • Glowing against dark
+     Cheddar Yellow • Bold & Vibrant • Glowing against dark
      -------------------------------------------------------------------------- */
 
   /* Background layers - Deep dark */
@@ -17,30 +17,30 @@
   --background-muted: #111827;
 
   /* Foreground / Text */
-  --foreground: #f0fdf4;
-  --foreground-muted: #a7f3d0;
-  --foreground-subtle: #6ee7b7;
+  --foreground: #fefce8;
+  --foreground-muted: #fde68a;
+  --foreground-subtle: #fcd34d;
 
-  /* Primary - Emerald (Bright & Glowing) */
-  --primary: #10b981;
-  --primary-hover: #34d399;
-  --primary-active: #059669;
+  /* Primary - Cheddar Yellow (Bright & Glowing) */
+  --primary: #facc15;
+  --primary-hover: #fde047;
+  --primary-active: #eab308;
   --primary-foreground: #030712;
-  --primary-subtle: #064e3b;
+  --primary-subtle: #713f12;
 
   /* Secondary */
-  --secondary: #f0fdf4;
-  --secondary-hover: #d1fae5;
+  --secondary: #fefce8;
+  --secondary-hover: #fef9c3;
   --secondary-foreground: #030712;
 
-  /* Accent - Teal/Cyan for highlights */
-  --accent: #2dd4bf;
-  --accent-subtle: #0d9488;
+  /* Accent - Orange/Amber for highlights */
+  --accent: #fb923c;
+  --accent-subtle: #c2410c;
 
   /* Borders */
   --border: #1f2937;
   --border-strong: #374151;
-  --border-focus: #10b981;
+  --border-focus: #facc15;
 
   /* Status colors */
   --success: #4ade80;
@@ -50,13 +50,13 @@
   --error: #f87171;
   --error-subtle: #7f1d1d;
 
-  /* Shadows - Emerald glow effects */
+  /* Shadows - Yellow glow effects */
   --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.5);
   --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.6), 0 1px 2px -1px rgb(0 0 0 / 0.6);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.6), 0 2px 4px -2px rgb(0 0 0 / 0.6);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6), 0 4px 6px -4px rgb(0 0 0 / 0.6);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.6), 0 8px 10px -6px rgb(0 0 0 / 0.6);
-  --shadow-glow: 0 0 40px -10px rgb(16 185 129 / 0.7);
+  --shadow-glow: 0 0 40px -10px rgb(250 204 21 / 0.7);
 
   /* Radius */
   --radius-sm: 0.375rem;
@@ -74,7 +74,7 @@
   /* Focus ring - WCAG compliant */
   --ring-width: 2px;
   --ring-offset: 2px;
-  --ring-color: rgb(16 185 129 / 0.6);
+  --ring-color: rgb(250 204 21 / 0.6);
 }
 
 /* --------------------------------------------------------------------------
@@ -92,26 +92,26 @@ html.light {
   --foreground-muted: #475569;
   --foreground-subtle: #94a3b8;
 
-  /* Primary - Emerald (darker for light mode) */
-  --primary: #059669;
-  --primary-hover: #047857;
-  --primary-active: #065f46;
+  /* Primary - Cheddar Yellow (darker for light mode) */
+  --primary: #ca8a04;
+  --primary-hover: #a16207;
+  --primary-active: #854d0e;
   --primary-foreground: #ffffff;
-  --primary-subtle: #d1fae5;
+  --primary-subtle: #fef9c3;
 
   /* Secondary */
   --secondary: #0f172a;
   --secondary-hover: #1e293b;
   --secondary-foreground: #ffffff;
 
-  /* Accent - Teal */
-  --accent: #14b8a6;
-  --accent-subtle: #ccfbf1;
+  /* Accent - Orange */
+  --accent: #ea580c;
+  --accent-subtle: #ffedd5;
 
   /* Borders */
   --border: #e2e8f0;
   --border-strong: #cbd5e1;
-  --border-focus: #059669;
+  --border-focus: #ca8a04;
 
   /* Status colors */
   --success: #22c55e;
@@ -127,10 +127,10 @@ html.light {
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-glow: 0 0 25px -5px rgb(5 150 105 / 0.4);
+  --shadow-glow: 0 0 25px -5px rgb(202 138 4 / 0.4);
 
   /* Focus ring */
-  --ring-color: rgb(5 150 105 / 0.5);
+  --ring-color: rgb(202 138 4 / 0.5);
 }
 
 /* --------------------------------------------------------------------------
