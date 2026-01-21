@@ -4,25 +4,25 @@ function SocialProfileMockup() {
     <div className="w-full max-w-[320px] rounded-xl border border-border bg-background-subtle p-4 shadow-lg" role="img" aria-label="Social media profile with Cheddarl.ink in bio">
       {/* Header */}
       <div className="flex items-center gap-3">
-        <div className="h-12 w-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500" />
+        <div className="h-12 w-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600" />
         <div>
-          <p className="font-semibold text-foreground">@pokecollector</p>
-          <p className="text-xs text-foreground-muted">Pokemon Card Trader</p>
+          <p className="font-semibold text-foreground">@artbylex</p>
+          <p className="text-xs text-foreground-muted">Digital Artist</p>
         </div>
       </div>
       {/* Bio */}
       <div className="mt-3">
         <p className="text-sm text-foreground-muted">
-          Rare cards &amp; graded slabs. DM for prices.
+          Commissions open! Character art &amp; illustrations.
         </p>
         <p className="mt-1 text-sm">
-          <span className="text-primary font-medium">cheddarl.ink/pokecollector</span>
+          <span className="text-primary font-medium">cheddarl.ink/artbylex</span>
         </p>
       </div>
       {/* Stats */}
       <div className="mt-3 flex gap-4 text-xs">
-        <span><strong className="text-foreground">2.4K</strong> <span className="text-foreground-muted">followers</span></span>
-        <span><strong className="text-foreground">892</strong> <span className="text-foreground-muted">following</span></span>
+        <span><strong className="text-foreground">8.2K</strong> <span className="text-foreground-muted">followers</span></span>
+        <span><strong className="text-foreground">341</strong> <span className="text-foreground-muted">following</span></span>
       </div>
     </div>
   )
@@ -47,11 +47,11 @@ function DiscordDMMockup() {
           </div>
         </div>
         <div className="flex gap-2">
-          <div className="h-8 w-8 shrink-0 rounded-full bg-gradient-to-br from-purple-500 to-pink-500" />
+          <div className="h-8 w-8 shrink-0 rounded-full bg-gradient-to-br from-green-500 to-emerald-600" />
           <div>
             <p className="text-xs text-gray-400">You <span className="text-gray-500">Today at 3:45 PM</span></p>
             <p className="text-sm text-gray-200">Awesome! Here&apos;s my payment link:</p>
-            <p className="mt-1 text-sm text-[#00b0f4] hover:underline">cheddarl.ink/pokecollector</p>
+            <p className="mt-1 text-sm text-[#00b0f4] hover:underline">cheddarl.ink/cardking</p>
           </div>
         </div>
       </div>
@@ -61,39 +61,68 @@ function DiscordDMMockup() {
 
 // QR Code stand mockup
 function QRCodeStandMockup() {
+  // More realistic QR code pattern (21x21 standard)
+  const qrPattern = [
+    1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,
+    1,0,0,0,0,0,1,0,0,1,0,1,0,0,1,0,0,0,0,0,1,
+    1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,
+    1,0,1,1,1,0,1,0,0,1,0,1,1,0,1,0,1,1,1,0,1,
+    1,0,1,1,1,0,1,0,1,0,1,0,0,0,1,0,1,1,1,0,1,
+    1,0,0,0,0,0,1,0,0,1,1,1,0,0,1,0,0,0,0,0,1,
+    1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,
+    0,0,0,0,0,0,0,0,1,1,0,1,1,0,0,0,0,0,0,0,0,
+    1,0,1,1,0,1,1,1,0,0,1,0,0,1,1,0,1,0,1,1,0,
+    0,1,0,1,1,0,0,1,1,0,0,0,0,0,1,1,0,1,0,0,1,
+    1,0,1,0,1,1,1,0,1,0,0,0,0,0,1,0,1,0,1,0,1,
+    0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,1,0,1,0,
+    1,0,1,0,1,1,1,0,1,0,0,0,0,0,1,0,1,0,1,0,1,
+    0,0,0,0,0,0,0,0,1,0,1,1,0,1,0,1,1,0,0,1,0,
+    1,1,1,1,1,1,1,0,0,1,1,0,1,0,1,0,0,1,0,1,1,
+    1,0,0,0,0,0,1,0,1,0,0,1,0,1,1,0,1,1,1,0,0,
+    1,0,1,1,1,0,1,0,1,1,0,0,1,0,0,1,0,0,1,1,1,
+    1,0,1,1,1,0,1,0,0,0,1,1,0,1,1,0,1,0,1,0,0,
+    1,0,1,1,1,0,1,0,1,0,1,0,1,0,0,1,1,1,0,1,1,
+    1,0,0,0,0,0,1,0,0,1,1,0,0,1,0,1,0,0,1,0,0,
+    1,1,1,1,1,1,1,0,1,0,0,1,1,0,1,1,0,1,1,1,1,
+  ]
+
   return (
     <div className="relative" role="img" aria-label="QR code display at a taco stand">
       {/* Stand/Counter illustration */}
-      <div className="relative mx-auto w-[300px]">
+      <div className="relative mx-auto w-[280px]">
         {/* Background - food stand feel */}
         <div className="absolute -inset-4 rounded-2xl bg-gradient-to-b from-amber-900/20 to-amber-800/10" />
 
         {/* QR Code display */}
-        <div className="relative rounded-xl border-2 border-amber-600/30 bg-background p-4 shadow-xl">
+        <div className="relative rounded-xl border-2 border-amber-600/30 bg-background p-5 shadow-xl">
           {/* Header */}
           <div className="text-center">
             <p className="text-lg font-bold text-foreground">Maria&apos;s Tacos</p>
             <p className="text-xs text-foreground-muted">Scan to pay</p>
           </div>
 
-          {/* QR Code placeholder */}
-          <div className="mx-auto mt-3 flex h-32 w-32 items-center justify-center rounded-lg bg-white p-2">
-            <div className="grid h-full w-full grid-cols-5 grid-rows-5 gap-0.5">
-              {Array.from({ length: 25 }).map((_, i) => (
+          {/* QR Code with centered logo */}
+          <div className="relative mx-auto mt-4 flex h-40 w-40 items-center justify-center rounded-lg bg-white p-2">
+            <div className="grid h-full w-full grid-cols-[repeat(21,1fr)] grid-rows-[repeat(21,1fr)] gap-[1px]">
+              {qrPattern.map((cell, i) => (
                 <div
                   key={i}
-                  className={`rounded-sm ${
-                    [0, 1, 2, 4, 5, 6, 10, 14, 18, 19, 20, 22, 23, 24].includes(i)
-                      ? 'bg-gray-900'
-                      : 'bg-gray-200'
-                  }`}
+                  className={cell === 1 ? 'bg-gray-900' : 'bg-white'}
                 />
               ))}
+            </div>
+            {/* Center logo overlay */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white p-1 shadow-sm">
+                <div className="flex h-full w-full items-center justify-center rounded bg-gradient-to-br from-yellow-400 to-amber-500">
+                  <span className="text-lg font-black text-white">C</span>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Link */}
-          <p className="mt-3 text-center text-xs font-medium text-primary">
+          <p className="mt-4 text-center text-sm font-medium text-primary">
             cheddarl.ink/mariastacos
           </p>
 

@@ -24,19 +24,19 @@ export default async function DashboardLayout({
   const profile = profileData as { username: string; display_name: string | null } | null
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
+    <div className="min-h-screen overflow-x-hidden bg-background">
       {/* Header */}
-      <header className="border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
+      <header className="border-b border-border bg-background-subtle">
         <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4">
-          <Link href="/dashboard" className="text-xl font-bold">
-            Cheddar<span className="text-yellow-500">l.ink</span>
+          <Link href="/dashboard" className="text-xl font-bold text-foreground">
+            Cheddar<span className="text-primary">l.ink</span>
           </Link>
           <div className="flex items-center gap-4">
             {profile?.username && (
               <Link
                 href={`/${profile.username}`}
                 target="_blank"
-                className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+                className="text-sm text-foreground-muted hover:text-foreground"
               >
                 View page
               </Link>
@@ -44,7 +44,7 @@ export default async function DashboardLayout({
             <form action="/auth/signout" method="POST">
               <button
                 type="submit"
-                className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+                className="text-sm text-foreground-muted hover:text-foreground"
               >
                 Log out
               </button>

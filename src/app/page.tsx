@@ -90,7 +90,7 @@ export default function Home() {
                   <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background-subtle px-4 py-1.5">
                     <span className="flex h-2 w-2 rounded-full bg-success" aria-hidden="true" />
                     <span className="text-sm text-foreground-muted">
-                      Free forever. No fees.
+                      No fees. Ever.
                     </span>
                   </div>
 

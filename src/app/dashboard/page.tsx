@@ -70,88 +70,71 @@ export default async function DashboardPage() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">
+        <h1 className="text-2xl font-bold text-foreground">
           Welcome, {profile.display_name || profile.username}
         </h1>
-        <p className="mt-1 text-zinc-600 dark:text-zinc-400">
+        <p className="mt-1 text-foreground-muted">
           Manage your payment methods and share your pay link
         </p>
       </div>
 
-      {/* Analytics Card */}
-      <div className="rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-        <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">
-          Page Views
-        </h2>
-        <div className="mt-4 grid grid-cols-3 gap-4">
-          <div className="rounded-lg bg-zinc-50 p-4 dark:bg-zinc-800">
-            <p className="text-sm text-zinc-500 dark:text-zinc-400">Last 24 hours</p>
-            <p className="mt-1 text-3xl font-bold text-zinc-900 dark:text-white">
-              {last24Hours}
-            </p>
-          </div>
-          <div className="rounded-lg bg-zinc-50 p-4 dark:bg-zinc-800">
-            <p className="text-sm text-zinc-500 dark:text-zinc-400">Last 7 days</p>
-            <p className="mt-1 text-3xl font-bold text-zinc-900 dark:text-white">
-              {last7Days}
-            </p>
-          </div>
-          <div className="rounded-lg bg-zinc-50 p-4 dark:bg-zinc-800">
-            <p className="text-sm text-zinc-500 dark:text-zinc-400">All time</p>
-            <p className="mt-1 text-3xl font-bold text-zinc-900 dark:text-white">
-              {totalViews}
-            </p>
-          </div>
-        </div>
+      {/* Analytics - Simple inline display */}
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-foreground-muted">
+        <span>
+          <span className="font-semibold text-foreground">{totalViews}</span> total views
+        </span>
+        <span className="hidden sm:inline text-border">•</span>
+        <span>
+          <span className="font-semibold text-foreground">{last7Days}</span> this week
+        </span>
+        <span className="hidden sm:inline text-border">•</span>
+        <span>
+          <span className="font-semibold text-foreground">{last24Hours}</span> today
+        </span>
       </div>
 
       {/* Pay Link Card */}
-      <div className="rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-        <div className="flex flex-col gap-6 sm:flex-row">
-          <div className="flex-1">
-            <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">
+      <div className="rounded-xl border border-border bg-background-subtle p-6">
+        <div className="flex flex-col gap-6 lg:flex-row">
+          <div className="min-w-0 flex-1">
+            <h2 className="text-lg font-semibold text-foreground">
               Your pay link
             </h2>
-            <div className="mt-4 flex items-center gap-3">
-              <div className="flex-1 rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3 dark:border-zinc-700 dark:bg-zinc-800">
-                <code className="text-sm text-zinc-900 dark:text-white">
+            <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="min-w-0 flex-1 overflow-hidden rounded-lg border border-border bg-background-muted px-4 py-3">
+                <code className="block truncate text-sm text-foreground">
                   {payLink}
                 </code>
               </div>
               <CopyButton
                 text={payLink}
-                className="rounded-lg bg-blue-600 px-4 py-3 text-sm font-medium text-white hover:bg-blue-500"
+                className="shrink-0 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground hover:bg-primary-hover"
               />
             </div>
-            <p className="mt-3 text-sm text-zinc-500">
+            <p className="mt-3 text-sm text-foreground-muted">
               Share this link anywhere to let people pay you
             </p>
           </div>
-          <div className="flex-shrink-0">
-            <h3 className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
-              QR Code
-            </h3>
-            <div className="mt-2">
-              <QRCodeDisplay url={payLink} size={150} />
-            </div>
+          <div className="flex justify-center lg:justify-start">
+            <QRCodeDisplay url={payLink} size={150} />
           </div>
         </div>
       </div>
 
       {/* Ephemeral Links Card */}
-      <div className="rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-        <div className="flex items-center justify-between">
+      <div className="rounded-xl border border-border bg-background-subtle p-6">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">
+            <h2 className="text-lg font-semibold text-foreground">
               Ephemeral Links
             </h2>
-            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+            <p className="mt-1 text-sm text-foreground-muted">
               Create temporary links that include PII methods (like Zelle)
             </p>
           </div>
           <Link
             href="/dashboard/ephemeral"
-            className="rounded-lg bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-900 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700"
+            className="shrink-0 rounded-lg bg-background-muted px-4 py-2 text-center text-sm font-medium text-foreground hover:bg-border"
           >
             Create link
           </Link>
@@ -159,11 +142,11 @@ export default async function DashboardPage() {
       </div>
 
       {/* Payment Methods */}
-      <div className="rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-        <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">
+      <div className="rounded-xl border border-border bg-background-subtle p-6">
+        <h2 className="text-lg font-semibold text-foreground">
           Payment methods
         </h2>
-        <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-1 text-sm text-foreground-muted">
           Add your payment methods so people can pay you
         </p>
         <PaymentMethodsManager

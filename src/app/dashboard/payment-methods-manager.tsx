@@ -18,7 +18,7 @@ function ReferralBadge({ method }: { method: PaymentMethod }) {
 
   if (method.referral_code && method.referral_enabled) {
     return (
-      <span className="rounded bg-green-100 px-1.5 py-0.5 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
+      <span className="rounded bg-green-900/30 px-1.5 py-0.5 text-xs font-medium text-green-400">
         Referral active
       </span>
     )
@@ -26,14 +26,14 @@ function ReferralBadge({ method }: { method: PaymentMethod }) {
 
   if (method.referral_code && !method.referral_enabled) {
     return (
-      <span className="rounded bg-zinc-100 px-1.5 py-0.5 text-xs text-zinc-500 dark:bg-zinc-700 dark:text-zinc-400">
+      <span className="rounded bg-background-muted px-1.5 py-0.5 text-xs text-foreground-muted">
         Referral paused
       </span>
     )
   }
 
   return (
-    <span className="rounded bg-blue-100 px-1.5 py-0.5 text-xs text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+    <span className="rounded bg-blue-900/30 px-1.5 py-0.5 text-xs text-blue-400">
       Referral available
     </span>
   )
@@ -76,26 +76,26 @@ function ReferralSection({
   const hasChanges = referralCode !== (method.referral_code || '')
 
   return (
-    <div className="mt-3 border-t border-zinc-200 pt-3 dark:border-zinc-700">
+    <div className="mt-3 border-t border-border pt-3">
       <button
         onClick={() => setIsExpanded(!isExpanded)}
         className="flex w-full items-center justify-between text-sm"
       >
         <span className="flex flex-col items-start gap-0.5">
-          <span className="flex items-center gap-2 font-medium text-zinc-700 dark:text-zinc-300">
+          <span className="flex items-center gap-2 font-medium text-foreground">
             Referral Program
-            <span className="rounded bg-green-100 px-1.5 py-0.5 text-xs text-green-700 dark:bg-green-900/30 dark:text-green-400">
+            <span className="rounded bg-green-900/30 px-1.5 py-0.5 text-xs text-green-400">
               {config.referral.bonusText}
             </span>
           </span>
           {!hasExistingCode && (
-            <span className="text-xs text-zinc-500 dark:text-zinc-400">
+            <span className="text-xs text-foreground-muted">
               Refer your friends! Add your promo code from the {config.name} app.
             </span>
           )}
         </span>
         <svg
-          className={`h-4 w-4 text-zinc-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+          className={`h-4 w-4 text-foreground-subtle transition-transform ${isExpanded ? 'rotate-180' : ''}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -107,7 +107,7 @@ function ReferralSection({
       {isExpanded && (
         <div className="mt-3 space-y-3">
           <div>
-            <label className="mb-1 block text-xs text-zinc-500 dark:text-zinc-400">
+            <label className="mb-1 block text-xs text-foreground-muted">
               {config.referral.inputLabel}
             </label>
             <input
@@ -115,24 +115,24 @@ function ReferralSection({
               value={referralCode}
               onChange={(e) => setReferralCode(e.target.value)}
               placeholder={config.referral.inputPlaceholder}
-              className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
+              className="w-full rounded-lg border border-border bg-background-muted px-3 py-2 text-sm text-foreground placeholder-foreground-subtle focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
             />
           </div>
 
           {referralCode && (
             <div className="flex items-center justify-between">
-              <label className="text-sm text-zinc-600 dark:text-zinc-400">
+              <label className="text-sm text-foreground-muted">
                 Show referral on public page
               </label>
               <button
                 onClick={handleToggle}
                 disabled={isSaving}
-                className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                  isEnabled ? 'bg-blue-600' : 'bg-zinc-200 dark:bg-zinc-700'
+                className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                  isEnabled ? 'bg-primary' : 'bg-background-muted'
                 }`}
               >
                 <span
-                  className={`inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                  className={`inline-block h-5 w-5 transform rounded-full bg-foreground shadow ring-0 transition duration-200 ease-in-out ${
                     isEnabled ? 'translate-x-5' : 'translate-x-0'
                   }`}
                 />
@@ -144,7 +144,7 @@ function ReferralSection({
             <button
               onClick={handleSave}
               disabled={isSaving}
-              className="w-full rounded-lg bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-500 disabled:opacity-50"
+              className="w-full rounded-lg bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:bg-primary-hover disabled:opacity-50"
             >
               {isSaving ? 'Saving...' : 'Save referral'}
             </button>
@@ -227,7 +227,7 @@ export function PaymentMethodsManager({ initialMethods, userId }: Props) {
     <div className="mt-6 space-y-4">
       {/* Existing methods */}
       {methods.length === 0 ? (
-        <p className="py-8 text-center text-sm text-zinc-500">
+        <p className="py-8 text-center text-sm text-foreground-muted">
           No payment methods added yet. Add one to get started.
         </p>
       ) : (
@@ -237,22 +237,22 @@ export function PaymentMethodsManager({ initialMethods, userId }: Props) {
             return (
               <div
                 key={method.id}
-                className="rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3 dark:border-zinc-700 dark:bg-zinc-800"
+                className="rounded-lg border border-border bg-background-muted px-4 py-3"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-lg dark:bg-zinc-900">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-background text-lg">
                       {config?.icon || '?'}
                     </span>
                     <div>
-                      <p className="flex items-center gap-2 font-medium text-zinc-900 dark:text-white">
+                      <p className="flex items-center gap-2 font-medium text-foreground">
                         {config?.name || method.type}
                         <ReferralBadge method={method} />
                       </p>
-                      <p className="text-sm text-zinc-500">
+                      <p className="text-sm text-foreground-muted">
                         {formatHandle(method.type as PaymentMethodType, method.handle)}
                         {method.is_pii && (
-                          <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-xs text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+                          <span className="ml-2 rounded bg-amber-900/30 px-1.5 py-0.5 text-xs text-amber-400">
                             PII
                           </span>
                         )}
@@ -261,7 +261,7 @@ export function PaymentMethodsManager({ initialMethods, userId }: Props) {
                   </div>
                   <button
                     onClick={() => handleDelete(method.id)}
-                    className="text-sm text-red-600 hover:text-red-500"
+                    className="text-sm text-red-500 hover:text-red-400"
                   >
                     Remove
                   </button>
@@ -277,17 +277,17 @@ export function PaymentMethodsManager({ initialMethods, userId }: Props) {
       {isAdding ? (
         <form
           onSubmit={handleAdd}
-          className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-700 dark:bg-zinc-800"
+          className="rounded-lg border border-border bg-background-muted p-4"
         >
           {error && (
-            <div className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-600 dark:bg-red-900/20 dark:text-red-400">
+            <div className="mb-4 rounded-lg bg-red-900/20 p-3 text-sm text-red-400">
               {error}
             </div>
           )}
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
+              <label className="block text-sm font-medium text-foreground">
                 Payment method
               </label>
               <select
@@ -296,7 +296,7 @@ export function PaymentMethodsManager({ initialMethods, userId }: Props) {
                   setNewMethodType(e.target.value as PaymentMethodType)
                   setNewMethodHandle('')
                 }}
-                className="mt-1 block w-full rounded-lg border border-zinc-300 bg-white px-4 py-2 text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
+                className="mt-1 block w-full rounded-lg border border-border bg-background px-4 py-2 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
               >
                 <option value="">Select a method</option>
                 {availableTypes.map((type) => (
@@ -309,12 +309,12 @@ export function PaymentMethodsManager({ initialMethods, userId }: Props) {
 
             {newMethodType && (
               <div>
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                <label className="block text-sm font-medium text-foreground">
                   {PAYMENT_METHODS[newMethodType].description}
                 </label>
-                <div className="mt-1 flex rounded-lg border border-zinc-300 bg-white focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 dark:border-zinc-600 dark:bg-zinc-900">
+                <div className="mt-1 flex rounded-lg border border-border bg-background focus-within:border-primary focus-within:ring-1 focus-within:ring-primary">
                   {PAYMENT_METHODS[newMethodType].prefix && (
-                    <span className="flex items-center pl-4 text-sm text-zinc-500">
+                    <span className="flex items-center pl-4 text-sm text-foreground-muted">
                       {PAYMENT_METHODS[newMethodType].prefix}
                     </span>
                   )}
@@ -323,11 +323,11 @@ export function PaymentMethodsManager({ initialMethods, userId }: Props) {
                     value={newMethodHandle}
                     onChange={(e) => setNewMethodHandle(e.target.value)}
                     placeholder={PAYMENT_METHODS[newMethodType].placeholder}
-                    className="block w-full rounded-lg border-0 bg-transparent px-4 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:ring-0 dark:text-white"
+                    className="block w-full rounded-lg border-0 bg-transparent px-4 py-2 text-sm text-foreground placeholder-foreground-subtle focus:outline-none focus:ring-0"
                   />
                 </div>
                 {PAYMENT_METHODS[newMethodType].isPii && (
-                  <p className="mt-2 text-xs text-amber-600 dark:text-amber-400">
+                  <p className="mt-2 text-xs text-amber-400">
                     This contains personal info (phone/email). It will only be shown in ephemeral links, not on your public page.
                   </p>
                 )}
@@ -339,7 +339,7 @@ export function PaymentMethodsManager({ initialMethods, userId }: Props) {
             <button
               type="submit"
               disabled={loading || !newMethodType || !newMethodHandle}
-              className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-500 disabled:opacity-50"
+              className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary-hover disabled:opacity-50"
             >
               {loading ? 'Adding...' : 'Add method'}
             </button>
@@ -351,7 +351,7 @@ export function PaymentMethodsManager({ initialMethods, userId }: Props) {
                 setNewMethodHandle('')
                 setError(null)
               }}
-              className="rounded-lg border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-700"
+              className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-background-muted"
             >
               Cancel
             </button>
@@ -361,7 +361,7 @@ export function PaymentMethodsManager({ initialMethods, userId }: Props) {
         <button
           onClick={() => setIsAdding(true)}
           disabled={availableTypes.length === 0}
-          className="flex w-full items-center justify-center gap-2 rounded-lg border-2 border-dashed border-zinc-300 px-4 py-4 text-sm font-medium text-zinc-600 transition-colors hover:border-zinc-400 hover:text-zinc-700 dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:text-zinc-300"
+          className="flex w-full items-center justify-center gap-2 rounded-lg border-2 border-dashed border-border px-4 py-4 text-sm font-medium text-foreground-muted transition-colors hover:border-primary hover:text-foreground"
         >
           <span className="text-lg">+</span>
           Add payment method
