@@ -86,13 +86,6 @@ export default function Home() {
               <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
                 {/* Hero Content */}
                 <div className="text-center lg:text-left">
-                  {/* Trust badge */}
-                  <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background-subtle px-4 py-1.5">
-                    <span className="flex h-2 w-2 rounded-full bg-success" aria-hidden="true" />
-                    <span className="text-sm text-foreground-muted">
-                      No fees. Ever.
-                    </span>
-                  </div>
 
                   <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
                     One link.
